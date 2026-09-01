@@ -1,3 +1,6 @@
+name: Unstop Daily POTD Solver
+
+on:
   # Triggerable via GitHub REST API (external scheduler/cron-job.org) or manually from Actions tab
   workflow_dispatch:
     inputs:
