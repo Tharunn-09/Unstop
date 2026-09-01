@@ -38,7 +38,7 @@ jobs:
           UNSTOP_USER_ID: ${{ secrets.UNSTOP_USER_ID }}
           UNSTOP_QUESTION_ID: ${{ github.event.inputs.question_id || secrets.UNSTOP_QUESTION_ID || 'potd' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL || 'gemini-3.7-flash' }}
+          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL || 'gemini-3.6-flash' }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GROQ_MODEL: ${{ secrets.GROQ_MODEL || 'qwen/qwen3.6-27b' }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
