@@ -1,0 +1,50 @@
+name: Unstop Daily POTD Solver
+
+on:
+  # Triggerable via GitHub REST API (external scheduler/cron-job.org) or manually from Actions tab
+  workflow_dispatch:
+    inputs:
+      question_id:
+        description: 'Question ID or URL (e.g. potd, 250146, or https://unstop.com/code/practice/250146)'
+        required: false
+        default: 'potd'
+      run_mode:
+        description: 'Run mode (live or dry-run)'
+        required: false
+        default: 'live'
+
+jobs:
+  solve-and-submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Unstop POTD Bot
+        env:
+          UNSTOP_COOKIES: ${{ secrets.UNSTOP_COOKIES }}
+          UNSTOP_AUTH_TOKEN: ${{ secrets.UNSTOP_AUTH_TOKEN }}
+          UNSTOP_USER_ID: ${{ secrets.UNSTOP_USER_ID }}
+          UNSTOP_QUESTION_ID: ${{ github.event.inputs.question_id || secrets.UNSTOP_QUESTION_ID || 'potd' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL || 'gemini-3.7-flash' }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: ${{ secrets.GROQ_MODEL || 'qwen/qwen3.6-27b' }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL || 'Unstop Bot <onboarding@resend.dev>' }}
+          RUN_MODE: ${{ github.event.inputs.run_mode || secrets.RUN_MODE || 'live' }}
+          PREFERRED_LANGUAGE: 'python3'
+        run: |
+          python main.py

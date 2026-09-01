@@ -1,0 +1,26 @@
+# Environment & Secrets
+.env
+*.env
+token.json
+session.json
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Scratch & Log files
+probe*.py
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
