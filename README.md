@@ -84,7 +84,7 @@ Add the following secrets:
 |---|---|---|
 | `UNSTOP_COOKIES` | Full cookie string from your logged-in Unstop session | **Yes** |
 | `GEMINI_API_KEY` | Your Google Gemini API Key | **Yes** |
-| `GEMINI_MODEL` | `gemini-1.5-flash` (or `gemini-2.0-flash`) | Optional |
+| `GEMINI_MODEL` | `gemini-3.6-flash` (or custom model) | Optional |
 | `RUN_MODE` | `live` (default) or `dry-run` | Optional |
 
 ---
